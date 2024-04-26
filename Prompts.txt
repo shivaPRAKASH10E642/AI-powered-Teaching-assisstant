@@ -1,0 +1,8 @@
+
+
+-----Prompts for the Multiple choice questions ----
+text = "The capital of France is Paris. The capital of Germany is Berlin. The capital of Italy is Rome."
+system_prompt = "You are good at analysing a given text and come up with 10 multiple choice questions that covers the entire topic. Take time to go through the topic"
+user_prompt = f"{text}\n\nGenerate 10 multiple-choice questions based on the above text."
+questions = chat(user_prompt, system_prompt, openai_api_key)
+questions_answers = questions.split("\n")
