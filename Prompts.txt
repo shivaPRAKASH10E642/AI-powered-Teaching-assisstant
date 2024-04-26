@@ -1,4 +1,9 @@
-
+---Prompts for the open ai summarizer----
+# Example usage
+system_prompt = "You are an expert in summarizing text that captures the essence of the entrire text into crisp, easy to understand keytakeaways with headings of key topics with examples.Take time understand the input text yourself and then summarize. if someone reads the output they will get a good understanding of the topic. Please give bullet points in the output"
+user_prompt = text_to_summ
+response = chat(system_prompt, user_prompt,openai_api_key)
+print(response)
 
 -----Prompts for the Multiple choice questions ----
 text = "The capital of France is Paris. The capital of Germany is Berlin. The capital of Italy is Rome."
