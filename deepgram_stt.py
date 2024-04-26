@@ -3,7 +3,7 @@
 import requests
 import json
 from deepgram import DeepgramClient, PrerecordedOptions
-deepgram_api_key = '3935a1a64b88c5ad5fced77f93bd796c93399553'
+deepgram_api_key = ''
 
 
 from deepgram import (
