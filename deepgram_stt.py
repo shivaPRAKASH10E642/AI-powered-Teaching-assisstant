@@ -1,10 +1,17 @@
 # !pip install deepgram
 # !pip install deepgram-sdk==3.2.7
 import requests
+import os
 import json
 from deepgram import DeepgramClient, PrerecordedOptions
-deepgram_api_key = '3935a1a64b88c5ad5fced77f93bd796c93399553'
 
+from dotenv import load_dotenv
+
+load_dotenv()
+deepgram_api_key = os.getenv('deepgram_api_key')
+print(deepgram_api_key)
+
+deepgram_api_key = ""
 
 from deepgram import (
     DeepgramClient,
@@ -12,7 +19,9 @@ from deepgram import (
     FileSource,
 )
 
-AUDIO_FILE = r"C:\Shiva\NP\Teaching Assisstant - AI\IP.mp3"
+AUDIO_FILE = r"C:\Shiva\NP\Teaching Assisstant - AI\AI_ST\AI-powered-Teaching-assisstant\IP.mp3"
+
+
 
 
 def main():
@@ -31,7 +40,7 @@ def main():
             smart_format=False,
         )
 
-        response = deepgram.listen.prerecorded.v("1").transcribe_file(payload, options)
+        response = deepgram.listen.prerecorded.v("2").transcribe_file(payload, options)
         
         print(response.to_json(indent=4))
 

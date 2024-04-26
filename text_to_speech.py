@@ -3,6 +3,7 @@ import youtube_dl
 import os
 from openai import OpenAI
 import dotenv
+import pandas
 
 load_dotenv()
 
