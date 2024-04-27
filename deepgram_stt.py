@@ -6,8 +6,7 @@ import json
 from deepgram import DeepgramClient, PrerecordedOptions
 from dotenv import load_dotenv
 
-# The API key we created in step 3
-deepgram_api_key = ''
+
 # Replace with your file path
 path_to_file = 'input_audio.mp3'
 
