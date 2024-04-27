@@ -4,49 +4,25 @@ import requests
 import os
 import json
 from deepgram import DeepgramClient, PrerecordedOptions
-
 from dotenv import load_dotenv
 
-load_dotenv()
-deepgram_api_key = os.getenv('deepgram_api_key')
-print(deepgram_api_key)
+# The API key we created in step 3
+deepgram_api_key = ''
+# Replace with your file path
+path_to_file = 'input_audio.mp3'
 
-deepgram_api_key = ""
+def deepgram(path_to_file,deepgram_api_key):
+    deepgram = DeepgramClient(deepgram_api_key)
 
-from deepgram import (
-    DeepgramClient,
-    PrerecordedOptions,
-    FileSource,
-)
-
-AUDIO_FILE = r"C:\Shiva\NP\Teaching Assisstant - AI\AI_ST\AI-powered-Teaching-assisstant\IP.mp3"
-
-
-
-
-def main():
-    try:
-        deepgram = DeepgramClient(deepgram_api_key)
-
-        with open(AUDIO_FILE, "rb") as file:
-            buffer_data = file.read()
-
-        payload: FileSource = {
-            "buffer": buffer_data,
-        }
+    with open(path_to_file, 'rb') as buffer_data:
+        payload = { 'buffer': buffer_data }
 
         options = PrerecordedOptions(
-            model="nova-2",
-            smart_format=False,
+            smart_format=True, model="nova-2", language="en-US", paragraphs = True
         )
 
-        response = deepgram.listen.prerecorded.v("2").transcribe_file(payload, options)
-        
+        print('Requesting transcript...')
+        print('Your file may take up to a couple minutes to process.')
+        response = deepgram.listen.prerecorded.v('1').transcribe_file(payload, options)
         print(response.to_json(indent=4))
-
-    except Exception as e:
-        print(f"Exception: {e}")
-
-
-if __name__ == "__main__":
-    main()
+        return response.to_json(indent=4)
