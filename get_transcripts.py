@@ -7,22 +7,23 @@ from pytube import YouTube
 dotenv.load_dotenv()
 
 
-def get_transcripts_from_url(audio_file_url, api_key):
+def get_transcripts_from_url(audio_file_url):
     """Read the input audio file from a provided URL and generate the transcripts along with the segments."""
     audio_file_path = get_youtube_audio(audio_file_url)
     print(audio_file_path)
-    return get_transcripts_from_file(audio_file_path, api_key)
+    with open(audio_file_path, "rb") as file:
+        buffered_data = file.read()
+
+    return get_transcripts_from_file(buffered_data)
 
 
-def get_transcripts_from_file(audio_file_path, api_key):
+def get_transcripts_from_file(buffer_data):
     """Read the input audio file uploaded to local and generate the transcripts along with the segments."""
     try:
-        deepgram_client = DeepgramClient(api_key=api_key)
-        with open(audio_file_path, "rb") as file:
-            buffered_data = file.read()
+        deepgram_client = DeepgramClient(api_key=os.getenv("DEEPGRAM_API_KEY"))
 
         payload: FileSource = {
-            "buffer": buffered_data,
+            "buffer": buffer_data,
         }
 
         options = PrerecordedOptions(
